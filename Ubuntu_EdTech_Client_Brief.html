@@ -1,0 +1,1209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ubuntu Learns. Africa Builds. — Client Brief</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ochre:      #C17F24;
+    --terra:      #B5451B;
+    --forest:     #1D6B3E;
+    --night:      #0F1923;
+    --night2:     #1A2535;
+    --purple:     #4B3A8C;
+    --cream:      #FAF6EF;
+    --sand:       #EDE3CE;
+    --mid-sand:   #C9B990;
+    --pink:       #A0336A;
+    --amber:      #C47E1A;
+    --teal:       #1A7A6E;
+    --white:      #FFFFFF;
+    --text:       #1C1C1C;
+    --text-mid:   #4A4A4A;
+    --text-light: #888880;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--night);
+    color: var(--cream);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(15,25,35,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(193,127,36,0.2);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 2.5rem; height: 56px;
+  }
+  .nav-brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem; font-weight: 700;
+    color: var(--ochre); letter-spacing: 0.02em;
+  }
+  .nav-links {
+    display: flex; gap: 0.25rem; list-style: none;
+  }
+  .nav-links a {
+    font-size: 0.7rem; font-weight: 500; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--mid-sand);
+    text-decoration: none; padding: 6px 10px; border-radius: 4px;
+    transition: color 0.2s, background 0.2s;
+  }
+  .nav-links a:hover { color: var(--ochre); background: rgba(193,127,36,0.08); }
+  .nav-page {
+    font-size: 0.7rem; color: var(--text-light);
+    font-family: 'DM Mono', monospace;
+  }
+
+  /* ── SLIDES ── */
+  .slide {
+    min-height: 100vh;
+    padding: 7rem 2.5rem 4rem;
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .slide-full {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 7rem 0 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* ── SECTION TAGS ── */
+  .tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--ochre); margin-bottom: 1rem;
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+  .tag::before {
+    content: ''; display: block;
+    width: 32px; height: 1px; background: var(--ochre);
+  }
+
+  /* ── HEADINGS ── */
+  h1.display {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 6vw, 5rem);
+    font-weight: 900; line-height: 1.05;
+    color: var(--white); margin-bottom: 1.5rem;
+  }
+  h1.display span { color: var(--ochre); }
+  h2.section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700; line-height: 1.1;
+    color: var(--white); margin-bottom: 1rem;
+  }
+  h2.section-title span { color: var(--ochre); }
+  h3.card-title {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem; font-weight: 600;
+    color: var(--white); margin-bottom: 0.4rem;
+  }
+
+  /* ── BODY TEXT ── */
+  p.lead {
+    font-size: 1.05rem; line-height: 1.75;
+    color: var(--sand); max-width: 680px;
+    font-weight: 300;
+  }
+  p.body {
+    font-size: 0.875rem; line-height: 1.75;
+    color: rgba(237,227,206,0.8);
+  }
+  p.small {
+    font-size: 0.8rem; line-height: 1.65;
+    color: rgba(237,227,206,0.65);
+  }
+
+  /* ── DIVIDER ── */
+  .rule {
+    width: 60px; height: 2px;
+    background: var(--ochre);
+    margin: 1.5rem 0;
+  }
+
+  /* ── COVER ── */
+  #cover {
+    background: var(--night);
+    position: relative; overflow: hidden;
+  }
+  .cover-geo {
+    position: absolute; top: 0; right: 0;
+    width: 45vw; height: 45vw; max-width: 600px; max-height: 600px;
+    background: var(--ochre);
+    clip-path: polygon(100% 0, 0 0, 100% 100%);
+    opacity: 0.12;
+  }
+  .cover-geo2 {
+    position: absolute; bottom: 0; left: 0;
+    width: 30vw; height: 30vw; max-width: 400px; max-height: 400px;
+    background: var(--terra);
+    clip-path: polygon(0 100%, 100% 100%, 0 0);
+    opacity: 0.1;
+  }
+  .cover-stripe {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 6px; background: linear-gradient(90deg,
+      var(--ochre) 0%, var(--terra) 33%, var(--forest) 66%, var(--purple) 100%);
+  }
+  .cover-content {
+    position: relative; z-index: 2;
+    max-width: 1100px; margin: 0 auto;
+    padding: 7rem 2.5rem 5rem;
+    min-height: 100vh; display: flex; flex-direction: column; justify-content: center;
+  }
+  .cover-kicker {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--ochre); margin-bottom: 2rem;
+  }
+  .cover-pillars {
+    display: flex; gap: 1rem; margin-top: 2.5rem; flex-wrap: wrap;
+  }
+  .cover-pillar {
+    padding: 0.75rem 1.25rem;
+    border-radius: 4px;
+    font-size: 0.75rem; font-weight: 600; letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .p-ubuntu  { background: var(--ochre); color: var(--night); }
+  .p-afro    { background: var(--forest); color: var(--white); }
+  .p-edtech  { background: var(--purple); color: var(--white); }
+  .cover-csr {
+    display: inline-flex; align-items: center; gap: 1rem;
+    margin-top: 1.5rem;
+    background: rgba(160,51,106,0.2);
+    border: 1px solid rgba(160,51,106,0.4);
+    border-radius: 4px; padding: 0.6rem 1.2rem;
+    font-size: 0.75rem; font-weight: 500;
+    color: #E896C4; letter-spacing: 0.04em;
+  }
+  .cover-csr::before {
+    content: '♥'; color: var(--pink); font-size: 0.9rem;
+  }
+  .cover-meta {
+    margin-top: 4rem; padding-top: 2rem;
+    border-top: 1px solid rgba(201,185,144,0.2);
+    display: flex; gap: 3rem; flex-wrap: wrap;
+  }
+  .cover-meta-item label {
+    display: block; font-size: 0.6rem; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--text-light); margin-bottom: 0.25rem;
+  }
+  .cover-meta-item span {
+    font-size: 0.85rem; color: var(--mid-sand);
+  }
+
+  /* ── STAT ROW ── */
+  .stat-row {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 1px; background: rgba(201,185,144,0.15);
+    border: 1px solid rgba(201,185,144,0.15);
+    border-radius: 8px; overflow: hidden;
+    margin: 2rem 0;
+  }
+  .stat-cell {
+    background: rgba(255,255,255,0.03);
+    padding: 1.75rem 1.5rem; text-align: center;
+  }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem; font-weight: 900;
+    line-height: 1; margin-bottom: 0.5rem;
+  }
+  .stat-lbl {
+    font-size: 0.72rem; color: var(--text-light);
+    letter-spacing: 0.04em; line-height: 1.4;
+  }
+
+  /* ── CARDS ── */
+  .cards-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1px; background: rgba(201,185,144,0.1);
+    border: 1px solid rgba(201,185,144,0.1);
+    border-radius: 8px; overflow: hidden;
+    margin-top: 2rem;
+  }
+  .card {
+    background: rgba(255,255,255,0.03);
+    padding: 1.5rem;
+    border-left: 3px solid transparent;
+    transition: background 0.2s;
+  }
+  .card:hover { background: rgba(255,255,255,0.055); }
+  .card.works  { border-left-color: var(--forest); }
+  .card.gap    { border-left-color: var(--terra); }
+  .card.opp    { border-left-color: var(--purple); }
+  .card.ubuntu { border-left-color: var(--ochre); }
+  .card.csr-m  { border-left-color: var(--amber); }
+  .card.csr-s  { border-left-color: var(--pink); }
+  .card-icon {
+    font-size: 1.1rem; margin-bottom: 0.75rem;
+  }
+
+  /* ── COMPETITOR TABLE ── */
+  .comp-table {
+    width: 100%; border-collapse: collapse;
+    margin-top: 2rem; font-size: 0.8rem;
+  }
+  .comp-table th {
+    background: rgba(193,127,36,0.15);
+    color: var(--ochre); font-weight: 600;
+    font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 0.75rem 1rem; text-align: left;
+    border-bottom: 1px solid rgba(193,127,36,0.2);
+  }
+  .comp-table td {
+    padding: 0.85rem 1rem;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    color: var(--sand); vertical-align: top; line-height: 1.55;
+  }
+  .comp-table tr:hover td { background: rgba(255,255,255,0.03); }
+  .comp-table td.gap-col {
+    color: #E07060; font-style: italic; font-size: 0.775rem;
+  }
+  .badge {
+    display: inline-block; font-size: 0.6rem; font-weight: 600;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 3px 8px; border-radius: 3px; margin-right: 4px;
+  }
+  .badge-you    { background: rgba(29,107,62,0.3); color: #6ED69A; }
+  .badge-theirs { background: rgba(181,69,27,0.25); color: #E07060; }
+
+  /* ── PILLAR BLOCKS ── */
+  .pillars-3 {
+    display: grid; grid-template-columns: repeat(3,1fr);
+    gap: 0; border-radius: 8px; overflow: hidden;
+    margin: 2rem 0; border: 1px solid rgba(255,255,255,0.08);
+  }
+  .pillar-block {
+    padding: 2rem 1.5rem;
+  }
+  .pillar-block.ub { background: rgba(193,127,36,0.15); border-right: 1px solid rgba(255,255,255,0.06); }
+  .pillar-block.af { background: rgba(29,107,62,0.15);  border-right: 1px solid rgba(255,255,255,0.06); }
+  .pillar-block.ed { background: rgba(75,58,140,0.2); }
+  .pillar-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem; letter-spacing: 0.15em; margin-bottom: 0.75rem;
+  }
+  .ub .pillar-num { color: var(--ochre); }
+  .af .pillar-num { color: #6ED69A; }
+  .ed .pillar-num { color: #A999E8; }
+  .pillar-block h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem; font-weight: 700;
+    margin-bottom: 0.75rem;
+  }
+  .ub h3 { color: var(--ochre); }
+  .af h3 { color: #6ED69A; }
+  .ed h3 { color: #A999E8; }
+
+  /* ── CSR SECTION ── */
+  .csr-duo {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 1.5rem; margin-top: 2rem;
+  }
+  .csr-card {
+    padding: 2rem;
+    border-radius: 8px;
+    position: relative; overflow: hidden;
+  }
+  .csr-card.mama {
+    background: linear-gradient(135deg, rgba(196,126,26,0.2) 0%, rgba(181,69,27,0.15) 100%);
+    border: 1px solid rgba(196,126,26,0.3);
+  }
+  .csr-card.sista {
+    background: linear-gradient(135deg, rgba(160,51,106,0.2) 0%, rgba(75,58,140,0.15) 100%);
+    border: 1px solid rgba(160,51,106,0.3);
+  }
+  .csr-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+  .mama .csr-label { color: var(--amber); }
+  .sista .csr-label { color: #E896C4; }
+  .csr-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem; font-weight: 900;
+    margin-bottom: 1rem;
+  }
+  .mama h3 { color: var(--amber); }
+  .sista h3 { color: #E896C4; }
+  .csr-geo {
+    position: absolute; bottom: -20px; right: -20px;
+    width: 100px; height: 100px; border-radius: 50%;
+    opacity: 0.06;
+  }
+  .mama .csr-geo { background: var(--amber); }
+  .sista .csr-geo { background: var(--pink); }
+
+  /* ── SITE ARCHITECTURE ── */
+  .site-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px,1fr));
+    gap: 0.75rem; margin-top: 2rem;
+  }
+  .site-page {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 6px; padding: 1.1rem 1.25rem;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+  .site-page:hover {
+    transform: translateY(-2px);
+    border-color: rgba(193,127,36,0.3);
+  }
+  .site-status {
+    font-size: 0.58rem; font-weight: 700; letter-spacing: 0.1em;
+    text-transform: uppercase; margin-bottom: 0.4rem;
+    display: block;
+  }
+  .site-page h4 {
+    font-size: 0.85rem; font-weight: 600;
+    color: var(--white); margin-bottom: 0.4rem;
+  }
+
+  /* ── DESIGN PALETTE ── */
+  .palette-row {
+    display: flex; gap: 0; border-radius: 8px; overflow: hidden;
+    height: 80px; margin: 1.5rem 0; border: 1px solid rgba(255,255,255,0.08);
+  }
+  .swatch { flex: 1; position: relative; cursor: default; }
+  .swatch:hover .swatch-label { opacity: 1; transform: translateY(0); }
+  .swatch-label {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    background: rgba(0,0,0,0.7); padding: 6px 8px;
+    font-size: 0.6rem; opacity: 0; text-align: center;
+    transition: all 0.2s; transform: translateY(4px);
+    letter-spacing: 0.05em;
+  }
+
+  /* ── TONE TABLE ── */
+  .tone-table {
+    width: 100%; border-collapse: collapse; margin-top: 1.5rem;
+    font-size: 0.82rem;
+  }
+  .tone-table th {
+    padding: 0.6rem 1rem; font-size: 0.62rem;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    text-align: left;
+  }
+  .tone-table th:first-child { color: var(--text-light); }
+  .tone-table th:last-child { color: var(--forest); }
+  .tone-table td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    line-height: 1.5;
+  }
+  .tone-table td:first-child {
+    color: var(--text-light); font-style: italic;
+  }
+  .tone-table td:last-child {
+    color: #7DD4A0; font-weight: 500;
+  }
+  .tone-table tr:hover td { background: rgba(255,255,255,0.02); }
+
+  /* ── ROADMAP ── */
+  .roadmap {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 1.5rem; margin-top: 2rem;
+  }
+  .phase {
+    border-radius: 8px; overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.07);
+  }
+  .phase-header {
+    padding: 1rem 1.25rem;
+    font-size: 0.8rem; font-weight: 600;
+    letter-spacing: 0.03em;
+  }
+  .ph-1 .phase-header { background: rgba(193,127,36,0.25); color: var(--ochre); }
+  .ph-2 .phase-header { background: rgba(29,107,62,0.25); color: #6ED69A; }
+  .ph-3 .phase-header { background: rgba(75,58,140,0.25); color: #A999E8; }
+  .ph-4 .phase-header { background: rgba(181,69,27,0.2); color: #E07060; }
+  .phase-body { padding: 1.1rem 1.25rem; background: rgba(255,255,255,0.02); }
+  .phase-body li {
+    font-size: 0.78rem; color: rgba(237,227,206,0.75);
+    line-height: 1.6; margin-bottom: 0.4rem; margin-left: 1rem;
+  }
+
+  /* ── CLOSING ── */
+  #closing {
+    background: var(--night);
+    position: relative; overflow: hidden;
+  }
+  .closing-content {
+    max-width: 1100px; margin: 0 auto;
+    padding: 7rem 2.5rem 5rem;
+    min-height: 100vh; display: flex; flex-direction: column; justify-content: center;
+  }
+  .closing-quote {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.4rem, 3vw, 2.2rem);
+    font-weight: 700; line-height: 1.4;
+    color: var(--white); max-width: 700px;
+    margin-bottom: 3rem;
+  }
+  .closing-quote em { color: var(--ochre); font-style: normal; }
+  .closing-badges {
+    display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 3rem;
+  }
+  .closing-badge {
+    padding: 0.6rem 1.25rem; border-radius: 4px;
+    font-size: 0.72rem; font-weight: 600; letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .cb-mama   { background: rgba(196,126,26,0.2); border: 1px solid rgba(196,126,26,0.4); color: var(--amber); }
+  .cb-sista  { background: rgba(160,51,106,0.2); border: 1px solid rgba(160,51,106,0.4); color: #E896C4; }
+  .cb-pan    { background: rgba(75,58,140,0.2);  border: 1px solid rgba(75,58,140,0.4);  color: #A999E8; }
+
+  /* ── QUOTE PULL ── */
+  .pull-quote {
+    border-left: 3px solid var(--ochre);
+    padding: 1rem 1.5rem;
+    margin: 2rem 0;
+    background: rgba(193,127,36,0.06);
+    border-radius: 0 4px 4px 0;
+  }
+  .pull-quote p {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem; font-style: italic;
+    color: var(--sand); line-height: 1.7;
+  }
+
+  /* ── PROGRESS BAR ── */
+  .progress-bar {
+    position: fixed; bottom: 0; left: 0;
+    height: 3px; background: var(--ochre);
+    transition: width 0.1s; z-index: 200;
+    width: 0%;
+  }
+
+  /* ── SECTION SEPARATOR ── */
+  .sep {
+    border: none;
+    border-top: 1px solid rgba(201,185,144,0.1);
+    margin: 0;
+  }
+
+  /* ── BG VARIANTS ── */
+  .bg-night2 { background: var(--night2); }
+  .bg-night  { background: var(--night); }
+
+  /* ── SCROLL REVEAL ── */
+  .reveal {
+    opacity: 0; transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.visible {
+    opacity: 1; transform: translateY(0);
+  }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+
+  @media (max-width: 768px) {
+    .stat-row { grid-template-columns: 1fr 1fr; }
+    .pillars-3 { grid-template-columns: 1fr; }
+    .csr-duo { grid-template-columns: 1fr; }
+    .roadmap { grid-template-columns: 1fr; }
+    nav .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progress"></div>
+
+<!-- ── NAV ── -->
+<nav>
+  <div class="nav-brand">Ubuntu Learns.</div>
+  <ul class="nav-links">
+    <li><a href="#summary">Summary</a></li>
+    <li><a href="#competitor">Competitors</a></li>
+    <li><a href="#positioning">Positioning</a></li>
+    <li><a href="#csr">CSR</a></li>
+    <li><a href="#blueprint">Blueprint</a></li>
+    <li><a href="#design">Design</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+  </ul>
+  <div class="nav-page" id="nav-page">01 / 08</div>
+</nav>
+
+<!-- ════════════════════════════════════════════════════════ -->
+<!-- SLIDE 01 — COVER -->
+<!-- ════════════════════════════════════════════════════════ -->
+<section id="cover" class="slide-full">
+  <div class="cover-geo"></div>
+  <div class="cover-geo2"></div>
+  <div class="cover-stripe"></div>
+  <div class="cover-content">
+    <div class="cover-kicker">EdTech Platform Brief · Competitive Intelligence · Strategic Proposal</div>
+    <h1 class="display">Ubuntu Learns.<br><span>Africa Builds<br>Its Own Future.</span></h1>
+    <p class="lead" style="max-width:600px; margin-top: 0.5rem;">
+      An EdTech platform rooted in Ubuntu philosophy, delivered through app and web,
+      pointing toward Afro-Futurism — Pan-African from launch.
+    </p>
+    <div class="cover-pillars">
+      <span class="cover-pillar p-ubuntu">Ubuntu — The Engine</span>
+      <span class="cover-pillar p-afro">Afro-Futurism — The Vision</span>
+      <span class="cover-pillar p-edtech">EdTech — App + Web</span>
+    </div>
+    <div class="cover-csr">CSR: Feed a Mother &nbsp;·&nbsp; Help a Sista</div>
+    <div class="cover-meta">
+      <div class="cover-meta-item">
+        <label>Brief Type</label>
+        <span>Competitive Intelligence + Strategic Proposal</span>
+      </div>
+      <div class="cover-meta-item">
+        <label>Geography</label>
+        <span>Pan-African — 54 Countries from Launch</span>
+      </div>
+      <div class="cover-meta-item">
+        <label>Date</label>
+        <span>May 2026 · Confidential</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ════════════════════════════════════════════════════════ -->
+<!-- SLIDE 02 — EXECUTIVE SUMMARY -->
+<!-- ════════════════════════════════════════════════════════ -->
+<section id="summary" class="bg-night2">
+  <div class="slide">
+    <div class="tag reveal">01 · Executive Summary</div>
+    <h2 class="section-title reveal reveal-delay-1">The Platform the <span>Continent</span><br>Has Been Waiting For</h2>
+    <div class="rule reveal reveal-delay-2"></div>
+    <p class="lead reveal reveal-delay-2">
+      There are EdTech platforms across Africa that teach children. There are NGOs that deliver
+      financial literacy. There are CSR programmes that feed families. But there is not a single
+      platform that does all three — rooted in an African philosophical framework, delivered
+      through modern technology, pointed toward a future that Africa imagines for itself.
+    </p>
+    <p class="body reveal reveal-delay-3" style="margin-top:1.25rem; max-width:680px;">
+      This platform changes that. By placing Ubuntu at the centre of <em>how</em> children learn —
+      not as a tagline but as the actual pedagogical engine — and by anchoring community care in
+      two concrete CSR commitments (<strong>Feed a Mother. Help a Sista.</strong>), it creates a
+      category that no competitor can authentically enter.
+    </p>
+
+    <div class="stat-row reveal reveal-delay-3" style="margin-top:2.5rem;">
+      <div class="stat-cell">
+        <div class="stat-num" style="color:var(--ochre)">54</div>
+        <div class="stat-lbl">African countries<br>targeted at launch</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-num" style="color:var(--terra)">0</div>
+        <div class="stat-lbl">Competitors with<br>Ubuntu pedagogy</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-num" style="color:var(--pink)">2</div>
+        <div class="stat-lbl">CSR pillars woven<br>into the product</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-num" style="color:var(--purple)">1</div>
+        <div class="stat-lbl">Platform — App + Web<br>+ Ubuntu philosophy</div>
+      </div>
+    </div>
+
+    <div class="pull-quote reveal reveal-delay-4">
+      <p>"We are not building another Duolingo for financial skills. We are building the first learning platform where Ubuntu is the curriculum, Afro-Futurism is the destination, and community care is the infrastructure."</p>
+    </div>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ════════════════════════════════════════════════════════ -->
+<!-- SLIDE 03 — COMPETITOR LANDSCAPE -->
+<!-- ════════════════════════════════════════════════════════ -->
+<section id="competitor" class="bg-night">
+  <div class="slide">
+    <div class="tag reveal">02 · Competitor Landscape</div>
+    <h2 class="section-title reveal reveal-delay-1">Who You Are <span>Up Against</span></h2>
+    <div class="rule reveal reveal-delay-1"></div>
+    <p class="body reveal reveal-delay-2" style="max-width:680px;">
+      The competitive field has two tiers: global NGO incumbents delivering financial education,
+      and African EdTech platforms delivering digital learning. Your platform sits at the intersection
+      of both — and is vulnerable to neither, because neither has built around Ubuntu philosophy
+      or community CSR as core product architecture.
+    </p>
+
+    <div class="reveal reveal-delay-3">
+      <table class="comp-table">
+        <thead>
+          <tr>
+            <th>Competitor</th>
+            <th>HQ</th>
+            <th>Model</th>
+            <th>Reach</th>
+            <th>Their Gap — Your Opening</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong style="color:var(--white)">Aflatoun International</strong><br>
+              <span class="badge badge-theirs">Primary threat</span></td>
+            <td>Amsterdam</td>
+            <td>NGO curriculum franchise</td>
+            <td>102 countries · 33M children</td>
+            <td class="gap-col">European design logic. Zero Ubuntu. Zero technology. Built for Dutch donors, not African communities. No app. No platform.</td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--white)">uLesson</strong></td>
+            <td>Nigeria</td>
+            <td>EdTech app, K-12 content</td>
+            <td>6 African countries</td>
+            <td class="gap-col">Content delivery only. No philosophy. No financial literacy. No community or CSR layer.</td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--white)">Eneza Education</strong></td>
+            <td>Kenya</td>
+            <td>SMS / USSD learning</td>
+            <td>East Africa</td>
+            <td class="gap-col">Feature-phone first. No Ubuntu. No financial education. No Afro-Futurist vision or women's upliftment.</td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--white)">M-Shule</strong></td>
+            <td>Kenya</td>
+            <td>AI tutoring app</td>
+            <td>Kenya only</td>
+            <td class="gap-col">Personalised tutoring — not community-rooted. No Pan-African ambition. No CSR integration.</td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--white)">Kytabu</strong></td>
+            <td>Kenya</td>
+            <td>Digital textbooks</td>
+            <td>Kenya / Uganda</td>
+            <td class="gap-col">Textbook digitisation only. No pedagogy innovation. No Ubuntu. No women's or maternal programmes.</td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--white)">Khan Academy</strong></td>
+            <td>USA</td>
+            <td>Free video lessons</td>
+            <td>Global</td>
+            <td class="gap-col">Western curriculum. No African worldview. No community accountability. No Afro-Futurist frame.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="pull-quote reveal" style="margin-top:2rem;">
+      <p>"Every competitor either has the technology but not the philosophy, or the philosophy but not the technology. None has both. None has Ubuntu. None has Feed a Mother. None has Help a Sista. The category is open."</p>
+    </div>
+
+    <h3 style="color:var(--ochre); font-size:1rem; margin-top:2.5rem; margin-bottom:1rem;" class="reveal">Aflatoun Deep Dive — What Works & What Doesn't</h3>
+
+    <div class="cards-grid reveal">
+      <div class="card works">
+        <div class="card-icon">✓</div>
+        <h3 class="card-title">Impact numbers that convince fast</h3>
+        <p class="small">33M children, 102 countries — donors and institutional partners are convinced immediately. The credibility architecture is strong. We must match this.</p>
+      </div>
+      <div class="card works">
+        <div class="card-icon">✓</div>
+        <h3 class="card-title">Age-tiered programme stack</h3>
+        <p class="small">Aflatot → Aflateen → Aflayouth. One organisation, full age pipeline, institutional stickiness. The naming system is memorable. We replicate this logic, Africanised.</p>
+      </div>
+      <div class="card works">
+        <div class="card-icon">✓</div>
+        <h3 class="card-title">Professional certification layer</h3>
+        <p class="small">SFEC and AflaMaster Trainer credentials professionalise the sector. You need their cert to access funding. We build an equivalent rooted in Ubuntu pedagogy.</p>
+      </div>
+      <div class="card works">
+        <div class="card-icon">✓</div>
+        <h3 class="card-title">Movement convening — Utrecht Declaration</h3>
+        <p class="small">150+ organisations from 80 countries signed their 2023 commitment. Positions them as movement leaders. We counter with Ubuntu EdTech Summit and Global Ubuntu Learning Day.</p>
+      </div>
+    </div>
+
+    <div class="cards-grid reveal" style="margin-top:1rem;">
+      <div class="card gap">
+        <div class="card-icon">✗</div>
+        <h3 class="card-title">No technology — curriculum, not EdTech</h3>
+        <p class="small">No app. No platform. No digital learning environment. They rely entirely on partner classrooms. A purpose-built app + web platform immediately outclasses their delivery model.</p>
+      </div>
+      <div class="card gap">
+        <div class="card-icon">✗</div>
+        <h3 class="card-title">Visually and culturally European</h3>
+        <p class="small">Generic nonprofit beige. Amsterdam boardroom energy. Ubuntu appears nowhere. Not one Adinkra symbol. Not one mother's face on the homepage. Built for Dutch donors.</p>
+      </div>
+      <div class="card gap">
+        <div class="card-icon">✗</div>
+        <h3 class="card-title">No African worldview — no philosophy</h3>
+        <p class="small">Purely instrumental Western financial literacy. No Ubuntu. No communal learning framework. Children are 'beneficiaries,' not protagonists. Communities are 'implementation contexts.'</p>
+      </div>
+      <div class="card gap">
+        <div class="card-icon">✗</div>
+        <h3 class="card-title">No Feed a Mother. No Help a Sista.</h3>
+        <p class="small">Aflatoun's CSR is donor conferences and annual reports. No programme feeds the mothers of the children they serve. No economic upliftment for women. The Ubuntu care circle is entirely absent.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ════════════════════════════════════════════════════════ -->
+<!-- SLIDE 04 — POSITIONING -->
+<!-- ════════════════════════════════════════════════════════ -->
+<section id="positioning" class="bg-night2">
+  <div class="slide">
+    <div class="tag reveal">03 · Strategic Positioning</div>
+    <h2 class="section-title reveal reveal-delay-1">Ubuntu as <span>Pedagogy.</span><br>Africa as <span>Destination.</span></h2>
+    <div class="rule reveal reveal-delay-1"></div>
+    <p class="lead reveal reveal-delay-2">
+      This is not a platform that teaches Ubuntu values. Ubuntu is the method by which
+      children learn everything — financial literacy, social skills, problem-solving,
+      community responsibility. The philosophy is not the wrapping. It is the engine.
+    </p>
+
+    <div class="pillars-3 reveal reveal-delay-3">
+      <div class="pillar-block ub">
+        <div class="pillar-num">PILLAR 01</div>
+        <h3>Ubuntu</h3>
+        <p class="small" style="color:rgba(237,227,206,0.8);">I am because we are. Children learn financial and social skills through communal practice, shared savings, collective problem-solving and mutual accountability — not individual competition. The community is the classroom.</p>
+      </div>
+      <div class="pillar-block af">
+        <div class="pillar-num">PILLAR 02</div>
+        <h3>Afro-Futurism</h3>
+        <p class="small" style="color:rgba(237,227,206,0.8);">Africa is not behind the world — it is ahead of where the world needs to go. Children learn to imagine and build futures that belong to their continent, not replicas of Western economic models. The future is African.</p>
+      </div>
+      <div class="pillar-block ed">
+        <div class="pillar-num">PILLAR 03</div>
+        <h3>EdTech</h3>
+        <p class="small" style="color:rgba(237,227,206,0.8);">A Pan-African app and web platform that makes Ubuntu-rooted learning accessible to every child — in their language, in their context, on their device. Offline mode for low-connectivity. 54 countries from day one.</p>
+      </div>
+    </div>
+
+    <h3 style="color:var(--ochre); font-size:0.85rem; letter-spacing:0.08em; text-transform:uppercase; margin: 2.5rem 0 1rem;" class="reveal">How Ubuntu Becomes Pedagogy</h3>
+
+    <div class="cards-grid reveal">
+      <div class="card ubuntu">
+        <h3 class="card-title">Communal Savings Mechanics</h3>
+        <p class="small">Digital Chama / stokvels built into the learning journey. Children pool virtual resources, debate allocation, and experience collective financial decision-making before individual reflection.</p>
+      </div>
+      <div class="card ubuntu">
+        <h3 class="card-title">Ubuntu Proverb Framework</h3>
+        <p class="small">Every lesson anchors in African proverbs across 54 countries. The wisdom already exists in the community — the platform surfaces and activates it as the curriculum's spine.</p>
+      </div>
+      <div class="card ubuntu">
+        <h3 class="card-title">Elder Guide AI</h3>
+        <p class="small">The platform's AI character is framed as a community elder — not a Western robot or algorithm. Wisdom-forward, not data-forward. Culturally resonant, not culturally imported.</p>
+      </div>
+      <div class="card ubuntu">
+        <h3 class="card-title">Collective Progress Metrics</h3>
+        <p class="small">Children track their community's growth alongside their own. No child succeeds alone. The Ubuntu score sits alongside the individual score — redefining what achievement means.</p>
+      </div>
+      <div class="card ubuntu">
+        <h3 class="card-title">Family Activation Loop</h3>
+        <p class="small">Lessons extend into the home. Mothers and caregivers receive companion content — directly connecting the Feed a Mother CSR programme to the learning platform at the product level.</p>
+      </div>
+      <div class="card ubuntu">
+        <h3 class="card-title">Multi-Language Ubuntu</h3>
+        <p class="small">Swahili, Hausa, Zulu, Amharic, French, Portuguese at minimum. Ubuntu philosophy localised — not translated. Community elders in each region contribute proverbs and framing.</p>
+      </div>
+    </div>
+
+    <div class="pull-quote reveal" style="margin-top:2rem;">
+      <p>"While other platforms deliver financial literacy to African children, we awaken Ubuntu intelligence in young Africans — the understanding that individual flourishing and community flourishing are the same thing, delivered through world-class technology, pointed toward a future Africa imagines and builds for itself."</p>
+    </div>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ════════════════════════════════════════════════════════ -->
+<!-- SLIDE 05 — CSR -->
+<!-- ════════════════════════════════════════════════════════ -->
+<section id="csr" class="bg-night">
+  <div class="slide">
+    <div class="tag reveal">04 · CSR Programmes</div>
+    <h2 class="section-title reveal reveal-delay-1"><span>Feed a Mother.</span><br><span>Help a Sista.</span></h2>
+    <div class="rule reveal reveal-delay-1"></div>
+    <p class="lead reveal reveal-delay-2">
+      These are not optional add-ons. They are structural to the platform's Ubuntu identity.
+      Ubuntu says: you cannot educate a child without nourishing the community that raises them.
+      These two programmes make that principle concrete, fundable, and measurable.
+    </p>
+
+    <div class="csr-duo reveal reveal-delay-3">
+      <div class="csr-card mama">
+        <div class="csr-geo"></div>
+        <div class="csr-label">CSR Pillar 01</div>
+        <h3>Feed a Mother</h3>
+        <p class="small" style="color:rgba(237,227,206,0.8); margin-bottom:1rem;">
+          Every child who completes a learning module on the platform triggers a contribution
+          to a community nutrition fund for mothers and caregivers. Learning becomes an act
+          of communal care. Donors fund meals, not just content. Impact investors can trace
+          every learning session to a family fed.
+        </p>
+        <p class="small" style="color:var(--amber); font-weight:600;">
+          → Learning completion = maternal nutrition contribution
+        </p>
+      </div>
+      <div class="csr-card sista">
+        <div class="csr-geo"></div>
+        <div class="csr-label">CSR Pillar 02</div>
+        <h3>Help a Sista</h3>
+        <p class="small" style="color:rgba(237,227,206,0.8); margin-bottom:1rem;">
+          A women's economic upliftment programme embedded in the platform ecosystem.
+          Mothers, aunties and older sisters of learners access micro-business training,
+          digital savings tools, and peer solidarity networks. Ubuntu flows upward: the
+          child's education seeds the woman's enterprise.
+        </p>
+        <p class="small" style="color:#E896C4; font-weight:600;">
+          → Child's learning = women's economic activation
+        </p>
+      </div>
+    </div>
+
+    <h3 style="color:var(--ochre); font-size:0.85rem; letter-spacing:0.08em; text-transform:uppercase; margin: 2.5rem 0 1rem;" class="reveal">Why CSR Is a Competitive Weapon</h3>
+
+    <div class="cards-grid reveal">
+      <div class="card csr-m">
+        <h3 class="card-title">CSR funders become product partners</h3>
+        <p class="small">Companies with women and children CSR mandates — Safaricom Foundation, MTN Foundation, Equity Bank Foundation, Standard Bank — can fund Feed a Mother and Help a Sista as measurable CSR outcomes. The platform becomes their delivery vehicle.</p>
+      </div>
+      <div class="card csr-s">
+        <h3 class="card-title">Community trust is pre-installed</h3>
+        <p class="small">In Ubuntu communities, a programme that feeds mothers and uplifts women has social permission to educate children. Trust is not earned through marketing — it is earned through visible, local acts of care. These programmes are that act, at continental scale.</p>
+      </div>
+      <div class="card opp">
+        <h3 class="card-title">Blended impact story for investors</h3>
+        <p class="small">Education + nutrition + women's enterprise outcomes from one platform. SDG alignment: SDG 1, 2, 4, 5, 8, 10. No competitor tells this story. African Development Bank, Mo Ibrahim Foundation, Mastercard Foundation all fund at this intersection.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ════════════════════════════════════════════════════════ -->
+<!-- SLIDE 06 — SITE BLUEPRINT -->
+<!-- ════════════════════════════════════════════════════════ -->
+<section id="blueprint" class="bg-night2">
+  <div class="slide">
+    <div class="tag reveal">05 · Website & Platform Blueprint</div>
+    <h2 class="section-title reveal reveal-delay-1">Site <span>Architecture</span></h2>
+    <div class="rule reveal reveal-delay-1"></div>
+    <p class="body reveal reveal-delay-2" style="max-width:680px;">
+      The website is the front door to the platform ecosystem — for parents, children, educators,
+      CSR funders and impact investors. Every page should feel like Ubuntu in action: warm,
+      communal, purposeful, pointed toward the future.
+    </p>
+
+    <div class="site-grid reveal reveal-delay-3">
+
+      <div class="site-page">
+        <span class="site-status" style="color:var(--ochre)">⬡ Build First</span>
+        <h4>Homepage / Hero</h4>
+        <p class="small">Ubuntu philosophy opens the page. Afro-Futurist visual. Impact numbers. Dual CTA: 'Start Learning' + 'Partner With Us'. Feed a Mother + Help a Sista counter visible above the fold.</p>
+      </div>
+
+      <div class="site-page">
+        <span class="site-status" style="color:#A999E8">★ Unique — No Competitor Has This</span>
+        <h4>What is Ubuntu Learning?</h4>
+        <p class="small">The philosophy page. Ubuntu as pedagogy through story, proverb and illustration. The deepest competitive differentiator. Aflatoun has no philosophical equivalent.</p>
+      </div>
+
+      <div class="site-page">
+        <span class="site-status" style="color:#6ED69A">⬡ Core Product Page</span>
+        <h4>The Platform — App + Web</h4>
+        <p class="small">Feature showcase. Communal savings mechanic, Ubuntu proverb framework, Elder Guide AI, collective progress dashboard. App store + web login. Multiple African languages.</p>
+      </div>
+
+      <div class="site-page">
+        <span class="site-status" style="color:var(--ochre)">⬡ Replicate + Reinvent Aflatoun</span>
+        <h4>Programmes by Age</h4>
+        <p class="small">Age-tiered learning journeys with African naming logic. Early years through young adulthood. Each tier shows Ubuntu mechanics specific to that developmental stage.</p>
+      </div>
+
+      <div class="site-page">
+        <span class="site-status" style="color:var(--amber)">♥ Unique CSR Page</span>
+        <h4>Feed a Mother</h4>
+        <p class="small">Programme page. How it works. Impact counter — meals funded. CSR partnership pathway. Beneficiary stories from mothers across the continent in first person.</p>
+      </div>
+
+      <div class="site-page">
+        <span class="site-status" style="color:#E896C4">♥ Unique CSR Page</span>
+        <h4>Help a Sista</h4>
+        <p class="small">Women's economic upliftment programme. Micro-business training. Digital savings community. Solidarity network map. Partnership and funding pathway for CSR partners.</p>
+      </div>
+
+      <div class="site-page">
+        <span class="site-status" style="color:#6ED69A">⬡ Partner Acquisition</span>
+        <h4>For Educators</h4>
+        <p class="small">School and educator onboarding. Ubuntu pedagogy teacher certification. Classroom tools and resources. Regional educator community map.</p>
+      </div>
+
+      <div class="site-page">
+        <span class="site-status" style="color:#A999E8">★ Funder Acquisition</span>
+        <h4>For CSR & Impact Partners</h4>
+        <p class="small">SDG alignment, blended impact metrics, CSR funding pathways. Feed a Mother and Help a Sista as CSR delivery vehicles. Download the impact prospectus.</p>
+      </div>
+
+      <div class="site-page">
+        <span class="site-status" style="color:var(--ochre)">⬡ Emotional Proof Layer</span>
+        <h4>Community Stories</h4>
+        <p class="small">First-person narratives from children, mothers and women across 54 countries. African voices, African camera. Community-authored, not donor-observed.</p>
+      </div>
+
+      <div class="site-page">
+        <span class="site-status" style="color:#A999E8">★ Unique Editorial</span>
+        <h4>Afro-Futures Blog</h4>
+        <p class="small">Philosophy, policy and culture. Ubuntu and money. Women and enterprise. Africa imagining its economic future. Thought leadership no EdTech competitor writes.</p>
+      </div>
+
+      <div class="site-page">
+        <span class="site-status" style="color:#6ED69A">⬡ Conversion Page</span>
+        <h4>Join the Movement</h4>
+        <p class="small">Parents enrol children. Educators register. Funders enquire. Women join Help a Sista. Language of Ubuntu solidarity — not 'sign up for our service.'</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ════════════════════════════════════════════════════════ -->
+<!-- SLIDE 07 — DESIGN DIRECTION -->
+<!-- ════════════════════════════════════════════════════════ -->
+<section id="design" class="bg-night">
+  <div class="slide">
+    <div class="tag reveal">06 · Design Direction</div>
+    <h2 class="section-title reveal reveal-delay-1">Visual <span>Identity</span></h2>
+    <div class="rule reveal reveal-delay-1"></div>
+
+    <h3 style="color:var(--ochre); font-size:0.8rem; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:1rem;" class="reveal">Colour Palette — Hover Each Swatch</h3>
+    <div class="palette-row reveal reveal-delay-2">
+      <div class="swatch" style="background:#C17F24"><div class="swatch-label">Ubuntu Gold<br>#C17F24</div></div>
+      <div class="swatch" style="background:#B5451B"><div class="swatch-label">Kihooto Earth<br>#B5451B</div></div>
+      <div class="swatch" style="background:#1D6B3E"><div class="swatch-label">Savanna Forest<br>#1D6B3E</div></div>
+      <div class="swatch" style="background:#0F1923"><div class="swatch-label">African Night<br>#0F1923</div></div>
+      <div class="swatch" style="background:#4B3A8C"><div class="swatch-label">Afro-Future<br>#4B3A8C</div></div>
+      <div class="swatch" style="background:#A0336A"><div class="swatch-label">Sista Power<br>#A0336A</div></div>
+      <div class="swatch" style="background:#C47E1A"><div class="swatch-label">Mama Gold<br>#C47E1A</div></div>
+      <div class="swatch" style="background:#FAF6EF; border:1px solid rgba(255,255,255,0.1)"><div class="swatch-label" style="color:var(--text)">Warm Cream<br>#FAF6EF</div></div>
+    </div>
+
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:2rem; margin-top:2rem;">
+      <div class="reveal">
+        <h3 style="color:var(--ochre); font-size:0.8rem; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:1rem;">Typography Direction</h3>
+        <p class="small" style="margin-bottom:0.75rem;">Choose a bold geometric display face with wide, proud, architectural proportions — African spatial logic, not Swiss minimalism. Pair with a humanist body font that breathes warmth.</p>
+        <p class="small" style="margin-bottom:0.75rem;">Adinkra symbols and Kente geometry inform decorative elements and section dividers throughout the platform.</p>
+        <p class="small">No fonts that read as 'corporate Geneva' or 'European NGO default.' Every typographic choice should feel like it belongs to the continent.</p>
+      </div>
+      <div class="reveal reveal-delay-2">
+        <h3 style="color:var(--ochre); font-size:0.8rem; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:1rem;">Imagery Principles</h3>
+        <ul style="list-style:none; display:flex; flex-direction:column; gap:0.5rem;">
+          <li class="small">→ Melanin-forward, community-centred photography</li>
+          <li class="small">→ Children as protagonists, not subjects</li>
+          <li class="small">→ Bold geometric illustration from Adinkra, Kente, Nsibidi visual traditions</li>
+          <li class="small">→ Afro-Futurist energy — cosmic, expansive, optimistic</li>
+          <li class="small">→ No stock-photo diversity theatre. Real faces, real places.</li>
+          <li class="small">→ Mothers and women prominent throughout — not just in CSR pages</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 style="color:var(--ochre); font-size:0.8rem; letter-spacing:0.1em; text-transform:uppercase; margin: 2.5rem 0 1rem;" class="reveal">Tone of Voice — The Language Inversion</h3>
+    <table class="tone-table reveal reveal-delay-2">
+      <thead>
+        <tr>
+          <th>Instead of (competitor language)</th>
+          <th>Say this (Ubuntu EdTech language)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>"Children are reached"</td><td>"Young Africans discover their Ubuntu intelligence"</td></tr>
+        <tr><td>"Beneficiaries"</td><td>"Future architects of the continent"</td></tr>
+        <tr><td>"Financial literacy delivery"</td><td>"Ubuntu wealth — collective and personal"</td></tr>
+        <tr><td>"Partners implement programmes"</td><td>"Communities lead the learning"</td></tr>
+        <tr><td>"Evidence-based curriculum"</td><td>"Wisdom-rooted, community-tested"</td></tr>
+        <tr><td>"Join the network"</td><td>"Ubuntu calls. Join the movement."</td></tr>
+        <tr><td>"Donate"</td><td>"Invest in Ubuntu. Feed a Mother. Help a Sista."</td></tr>
+        <tr><td>"Global reach"</td><td>"Pan-African from day one"</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ════════════════════════════════════════════════════════ -->
+<!-- SLIDE 08 — ROADMAP -->
+<!-- ════════════════════════════════════════════════════════ -->
+<section id="roadmap" class="bg-night2">
+  <div class="slide">
+    <div class="tag reveal">07 · Build Roadmap</div>
+    <h2 class="section-title reveal reveal-delay-1">Phased Launch — <span>Pan-African</span><br>from Day One</h2>
+    <div class="rule reveal reveal-delay-1"></div>
+    <p class="body reveal reveal-delay-2" style="max-width:680px;">
+      Each phase delivers a complete, usable product — not a half-built promise.
+      Community trust is earned through visible action, not future features.
+    </p>
+
+    <div class="roadmap reveal reveal-delay-3">
+      <div class="phase ph-1">
+        <div class="phase-header">Phase 1 — Foundation &nbsp;·&nbsp; Weeks 1–4</div>
+        <div class="phase-body">
+          <ul>
+            <li>Define brand identity: Ubuntu Gold palette, Adinkra-inspired design system</li>
+            <li>Write the Ubuntu pedagogy manifesto — the philosophical engine document</li>
+            <li>Build homepage hero: Afro-Futurist visual, impact counters, CSR above the fold</li>
+            <li>Launch Feed a Mother pilot: 1 community, documented, live counter on site</li>
+            <li>Tone of voice guide and language inversion framework</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="phase ph-2">
+        <div class="phase-header">Phase 2 — Core Platform &nbsp;·&nbsp; Weeks 5–12</div>
+        <div class="phase-body">
+          <ul>
+            <li>Web learning platform: first 3 Ubuntu modules, communal savings mechanic live</li>
+            <li>Age-tiered programme pages with Ubuntu mechanics explained per stage</li>
+            <li>Educator portal: teacher onboarding and Ubuntu pedagogy certification</li>
+            <li>Help a Sista beta: women's digital savings community and peer network</li>
+            <li>Community stories hub: 10 first-person narratives from 5 countries</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="phase ph-3">
+        <div class="phase-header">Phase 3 — Mobile & Scale &nbsp;·&nbsp; Months 4–7</div>
+        <div class="phase-body">
+          <ul>
+            <li>iOS and Android app launch: full platform parity, offline mode for low-connectivity</li>
+            <li>Multi-language rollout: Swahili, Hausa, Zulu, Amharic, French, Portuguese</li>
+            <li>CSR partnerships: Safaricom Foundation, MTN Foundation, Equity Bank Foundation</li>
+            <li>Afro-Futures blog: weekly editorial on Ubuntu, money, women and African futures</li>
+            <li>Pan-African educator network: 54-country partner map live</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="phase ph-4">
+        <div class="phase-header">Phase 4 — Movement &nbsp;·&nbsp; Months 8–12</div>
+        <div class="phase-body">
+          <ul>
+            <li>Global Ubuntu Learning Day — direct counter to Aflatoun's Global Money Week</li>
+            <li>Ubuntu EdTech Certification: professional educator credential</li>
+            <li>Impact investor prospectus: blended SDG impact across education, nutrition, women</li>
+            <li>First Ubuntu EdTech Summit: educators, mothers, funders, community leaders</li>
+            <li>Approach: African Development Bank, Mo Ibrahim Foundation, Mastercard Foundation</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ════════════════════════════════════════════════════════ -->
+<!-- SLIDE 09 — CLOSING -->
+<!-- ════════════════════════════════════════════════════════ -->
+<section id="closing" class="bg-night">
+  <div class="closing-content">
+    <div class="cover-geo" style="opacity:0.07;"></div>
+    <div class="tag reveal">08 · Closing</div>
+    <div class="closing-quote reveal reveal-delay-1">
+      The world does not need another NGO teaching children about money.<br><br>
+      It needs a platform where <em>Ubuntu is the lesson plan,</em><br>
+      where a mother is fed every time a child learns,<br>
+      where a sister is uplifted every time a community grows,<br>
+      and where <em>Africa builds the economic future it actually wants.</em>
+    </div>
+    <p class="body reveal reveal-delay-2" style="max-width:580px; margin-bottom:2.5rem;">
+      That platform does not exist yet.<br>
+      This brief is the blueprint to build it.
+    </p>
+    <div class="closing-badges reveal reveal-delay-3">
+      <span class="closing-badge cb-mama">♥ Feed a Mother</span>
+      <span class="closing-badge cb-sista">♥ Help a Sista</span>
+      <span class="closing-badge cb-pan">Pan-African · 54 Countries</span>
+    </div>
+    <div style="margin-top:4rem; padding-top:2rem; border-top:1px solid rgba(201,185,144,0.15);
+                display:flex; gap:3rem; flex-wrap:wrap;" class="reveal reveal-delay-4">
+      <div>
+        <div style="font-size:0.6rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--text-light); margin-bottom:0.3rem;">Prepared for</div>
+        <div style="font-size:0.85rem; color:var(--mid-sand);">Client Review · Ubuntu EdTech Platform</div>
+      </div>
+      <div>
+        <div style="font-size:0.6rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--text-light); margin-bottom:0.3rem;">Brief Type</div>
+        <div style="font-size:0.85rem; color:var(--mid-sand);">Competitive Intelligence + Strategic Proposal</div>
+      </div>
+      <div>
+        <div style="font-size:0.6rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--text-light); margin-bottom:0.3rem;">Date</div>
+        <div style="font-size:0.85rem; color:var(--mid-sand);">May 2026 · Confidential</div>
+      </div>
+    </div>
+    <div class="cover-stripe" style="position:fixed; bottom:3px;"></div>
+  </div>
+</section>
+
+<script>
+  // Progress bar
+  window.addEventListener('scroll', () => {
+    const scrolled = window.scrollY;
+    const total = document.body.scrollHeight - window.innerHeight;
+    document.getElementById('progress').style.width = (scrolled / total * 100) + '%';
+  });
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Nav page indicator
+  const sections = document.querySelectorAll('section[id]');
+  const navPage = document.getElementById('nav-page');
+  const labels = {
+    cover: '01 / 08 · Cover',
+    summary: '02 / 08 · Executive Summary',
+    competitor: '03 / 08 · Competitors',
+    positioning: '04 / 08 · Positioning',
+    csr: '05 / 08 · CSR',
+    blueprint: '06 / 08 · Blueprint',
+    design: '07 / 08 · Design',
+    roadmap: '08 / 08 · Roadmap',
+    closing: '08 / 08 · Closing',
+  };
+  const pageObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting && labels[e.target.id]) {
+        navPage.textContent = labels[e.target.id];
+      }
+    });
+  }, { threshold: 0.3 });
+  sections.forEach(s => pageObserver.observe(s));
+</script>
+</body>
+</html>
